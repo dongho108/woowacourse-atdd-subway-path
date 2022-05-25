@@ -18,11 +18,14 @@ public enum AgeDiscountFactory {
         this.ageDiscountPolicy = ageDiscountPolicy;
     }
 
-    public static AgeDiscountPolicy from(int rawAge) {
+    public static AgeDiscountPolicy from(int age) {
+        return findAgeDiscountFactory(age).ageDiscountPolicy;
+    }
+
+    private static AgeDiscountFactory findAgeDiscountFactory(int rawAge) {
         return Arrays.stream(AgeDiscountFactory.values())
             .filter(age -> age.ageCondition.test(rawAge))
             .findFirst()
-            .map(age -> age.ageDiscountPolicy)
             .orElseThrow(() -> new IllegalArgumentException("나이가 잘못 입력되었습니다."));
     }
 }
