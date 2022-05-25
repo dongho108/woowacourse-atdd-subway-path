@@ -11,13 +11,13 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import wooteco.subway.exception.EmptyResultException;
 import wooteco.subway.ui.dto.ExceptionResponse;
 
-@ControllerAdvice
+@RestControllerAdvice
 public class ExceptionController {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
