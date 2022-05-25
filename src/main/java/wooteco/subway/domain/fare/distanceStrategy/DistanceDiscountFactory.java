@@ -18,10 +18,13 @@ public enum DistanceDiscountFactory {
         this.distanceDiscountPolicy = distanceDiscountPolicy;
     }
 
-    public static DistanceDiscountPolicy from(int rawDistance) {
+    public static DistanceDiscountPolicy from(int distance) {
+        return findDistanceDiscountFactory(distance).distanceDiscountPolicy;
+    }
+
+    public static DistanceDiscountFactory findDistanceDiscountFactory(int rawDistance) {
         return Arrays.stream(DistanceDiscountFactory.values())
             .filter(distance -> distance.discountCondition.test(rawDistance))
-            .map(distance -> distance.distanceDiscountPolicy)
             .findFirst()
             .orElseThrow(() -> new IllegalArgumentException("거리가 잘못 입력되었습니다."));
     }
